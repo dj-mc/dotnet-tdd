@@ -1,6 +1,6 @@
 namespace customers.UnitTests;
 
-public class UnitTest1
+public class TestUsersController
 {
     [Fact]
     public void Test1()
