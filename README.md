@@ -9,10 +9,12 @@ dotnet sln add ./**/*.csproj
 ```
 
 ```bash
+# Configure tests
 cd customers.UnitTests
-
 # Install Moq
 dotnet add package Moq --version 4.18.3
 # Install FluentAssertions
 dotnet add package FluentAssertions --version 6.8.0
+# Reference code in API
+dotnet add reference ../customers.API/
 ```
