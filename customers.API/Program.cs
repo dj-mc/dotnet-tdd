@@ -1,15 +1,22 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Compose services
+ConfigureServices(builder.Services);
 
+// Middleware
+
+// Add services to WebApp container
+// Configure the usage of common controllers
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configure ApiExplorer with Endpoint.Metadata
 builder.Services.AddEndpointsApiExplorer();
+// SwaggerDocument objects from routes
 builder.Services.AddSwaggerGen();
 
+// Build configuration of WebApplication
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -23,3 +30,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// DependencyInjection.IServiceCollection
+void ConfigureServices(IServiceCollection services) // Contract spec for services
+{
+    // Add transient service IUsersService implemented as UsersService
+    services.AddTransient<IUsersService, UsersService>();
+}
