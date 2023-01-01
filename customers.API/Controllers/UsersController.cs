@@ -21,6 +21,6 @@ public class UsersController : ControllerBase
     {
         var retrieved_users = await _users_service.GetUsers();
         // OkObjectResult object, producing status code 200
-        return Ok("Everything is Good");
+        return Ok(retrieved_users);
     }
 }

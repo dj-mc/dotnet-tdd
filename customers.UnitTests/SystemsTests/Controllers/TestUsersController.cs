@@ -45,4 +45,23 @@ public class TestUsersController
         mock_users_service.
             Verify(service => service.GetUsers(), Times.Once());
     }
+
+    [Fact]
+    public async Task ReturnUsersList()
+    {
+        var mock_users_service = new Mock<IUsersService>();
+
+        mock_users_service
+            .Setup(service => service.GetUsers())
+            .ReturnsAsync(new List<User>());
+
+        var users_controller_instance = new UsersController(mock_users_service.Object);
+
+        // On successful status code 200
+        var response = await users_controller_instance.Get();
+        response.Should().BeOfType<OkObjectResult>();
+        // Return type should be a List of Users
+        var ok_object_result = (OkObjectResult)response;
+        ok_object_result.Value.Should().BeOfType<List<User>>();
+    }
 }
